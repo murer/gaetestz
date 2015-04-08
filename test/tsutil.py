@@ -3,12 +3,8 @@ import sys
 import unittest
 import os
 
-fixed = False
 
 def fix():
-    if fixed:
-        print 'already fixed'
-        return
     sdk_path = '.gen/google_appengine'
     if os.path.exists(os.path.join(sdk_path, 'platform/google_appengine')):
       sys.path.insert(0, os.path.join(sdk_path, 'platform/google_appengine'))
