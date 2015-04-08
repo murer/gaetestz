@@ -3,7 +3,6 @@ import sys
 import unittest
 import os
 
-
 def fix():
     sdk_path = '.gen/google_appengine'
     if os.path.exists(os.path.join(sdk_path, 'platform/google_appengine')):
