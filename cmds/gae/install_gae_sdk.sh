@@ -1,7 +1,7 @@
 #!/bin/bash -xe
 
 if [ ! -f .gen/google_appengine/appcfg.py ]; then
-	
+    
     rm -rf .gen/google_appengine .gen/gae.zip || true
     mkdir .gen || true
 
