@@ -17,10 +17,14 @@ def fix():
     except ImportError:
         print "Note: unable to import appengine_config."
 
-def main(test_path):
-    suite = unittest.loader.TestLoader().discover(test_path)
+def test_all():
+    suite = unittest.loader.TestLoader().discover('test')
     unittest.TextTestRunner(verbosity=2).run(suite)
 
+def start_web():
+    """ aaa """
+
 if __name__ == '__main__':
-        main('test')
+        #test_all()
+        start_web()
         
