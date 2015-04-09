@@ -1,10 +1,11 @@
 import webapp2
+import sample
 
-class Ping(webapp2.RequestHandler):
+class PingService(webapp2.RequestHandler):
     def get(self):
         self.response.body = 'pong'
 
-
 app = webapp2.WSGIApplication([
-    ('/s/ping', Ping)
-    ])
+    ('/s/ping', PingService),
+    ('/s/sample', sample.SampleService)
+])
