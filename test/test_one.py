@@ -20,8 +20,9 @@ class OneTestCase(test_case.TestCase):
         conn = httplib.HTTPConnection('localhost', test_case.gae.port)
         conn.request('GET', '/s/ping')
         resp = conn.getresponse()
-        print resp.status, resp.reason
-        print resp.read()
+        self.assertEqual(200, resp.status)
+        self.assertEqual('OK', resp.reason)
+        self.assertEqual('pong', resp.read())
         conn.close()
 
     def test_web_twice(self):
