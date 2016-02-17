@@ -66,32 +66,12 @@ class GaeTestServer(object):
             self.httpd.shutdown()
             self.httpd = None
 
-def test(gae):
-    import httplib
-    conn = httplib.HTTPConnection('localhost', gae.port)
-    conn.request('GET', '/s/ping')
-    resp = conn.getresponse()
-    print resp.status, resp.reason
-    print resp.read()
-    conn.close()
-
-
 def main():
     gae = GaeTestServer()
     gae.boot_gae()
     import main
     gae.boot_web(8080, main.app)
-    gae.server_forever_background()
-    print 'Serving on', gae.port
-
-    test(gae)
-
-    gae.shutdown()
-
-    gae.boot_gae()
-    gae.boot_web(8080, main.app)
-    gae.server_forever_background()
-    test(gae)
+    gae.server_forever()
     gae.shutdown()
 
 if __name__ == '__main__':
