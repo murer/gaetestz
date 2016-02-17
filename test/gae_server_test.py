@@ -33,9 +33,19 @@ class GaeTestServer(object):
         import dev_appserver
         dev_appserver.fix_sys_path()
         sys.path.insert(0, 'src')
+        self.testbed = None
+        self.httpd = None
 
     def boot_gae(self):
-        print 'boot_gae'
+        from google.appengine.api import memcache
+        from google.appengine.ext import ndb
+        from google.appengine.ext import testbed
+        from google.appengine.datastore import datastore_stub_util
+        self.testbed = testbed.Testbed()
+        self.testbed.activate()
+        self.policy = datastore_stub_util.PseudoRandomHRConsistencyPolicy(probability=0)
+        self.testbed.init_datastore_v3_stub(consistency_policy=self.policy)
+        self.testbed.init_memcache_stub()
 
     def boot_web(self, port, app):
         self.port = port
@@ -50,6 +60,8 @@ class GaeTestServer(object):
         self.httpd.serve_forever()
 
     def shutdown(self):
+        if self.testbed:
+            self.testbed.deactivate()
         if self.httpd:
             self.httpd.shutdown()
             self.httpd = None
