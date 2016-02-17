@@ -1,13 +1,10 @@
 
 import test_case
-from google.appengine.api import memcache
 from google.appengine.ext import ndb
-from google.appengine.ext import testbed
-from google.appengine.datastore import datastore_stub_util
 
 class OneTestCase(test_case.TestCase):
 
-    def testEventuallyConsistentGlobalQueryResult(self):
+    def test_one(self):
         class TestModel(ndb.Model):
             pass
         user_key = ndb.Key('User', 'ryan')
