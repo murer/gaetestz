@@ -23,3 +23,6 @@ class OneTestCase(test_case.TestCase):
         print resp.status, resp.reason
         print resp.read()
         conn.close()
+
+    def test_web_twice(self):
+        self.test_web()
