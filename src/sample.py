@@ -12,12 +12,12 @@ class SampleService(webutil.BaseHandler):
         ident = self.param('id')
         ret = SampleEntity.get_by_id(ident)
         if not ret:
-            raise webutil.NotFoundError()
+            return self.resp_json(None)
         self.resp_json({ 'id': ret.key.id(), 'desc': ret.desc, 'num': ret.num })
 
     def post(self):
         data = self.req_json()
-        ent = SampleEntity(id = data['id'], 
+        ent = SampleEntity(id = data['id'],
             desc = data.get('desc'),
             num = data.get('num'))
         ret = ent.put()
@@ -34,4 +34,3 @@ class SampleService(webutil.BaseHandler):
             'kind': ret.kind(),
             'id': ret.id()
         })
-

@@ -1,6 +1,7 @@
 
 import test_case
 import httplib
+import testutil
 from google.appengine.ext import ndb
 
 class OneTestCase(test_case.TestCase):
@@ -29,3 +30,10 @@ class OneTestCase(test_case.TestCase):
 
     def test_web_twice(self):
         self.test_web()
+
+    def test_other(self):
+        self.assertIsNone(testutil.http_json('GET', 'localhost', test_case.gae.port, '/s/sample?id=testid'))
+        testutil.http_json('POST', 'localhost', test_case.gae.port, '/s/sample', {"id":"testid","desc":"d1","num":10})
+
+    def test_other_twice(self):
+        self.test_other()
