@@ -23,7 +23,7 @@ def http_json(method, uri, content = None):
     json, code = http(method, uri, content)
     if(code != 200):
         raise Error('Error on http client: %s: %s' % (code, json))
-    return JSON.loads(json)
+    return JSON.loads(json), code
 
 def http(method, uri, content = None):
     conn = httplib.HTTPConnection('localhost', gae.port)
