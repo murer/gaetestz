@@ -3,7 +3,7 @@ import sample
 
 class PingService(webapp2.RequestHandler):
     def get(self):
-        self.response.body = 'pong'
+        self.response.body = '"pong"'
 
 app = webapp2.WSGIApplication([
     ('/s/ping', PingService),

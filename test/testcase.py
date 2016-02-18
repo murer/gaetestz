@@ -1,11 +1,26 @@
+import unittest
 import httplib
 import json as JSON
+from gae_server_test import GaeTestServer
 
 class Error(Exception):
     """ Error """
 
-def http_json(method, host, port, uri, content = None):
-    conn = httplib.HTTPConnection(host, port)
+gae = GaeTestServer()
+
+class TestCase(unittest.TestCase):
+
+    def setUp(self):
+        import main
+        gae.boot_gae()
+        gae.boot_web(8080, main.app)
+        gae.server_forever_background()
+
+    def tearDown(self):
+        gae.shutdown()
+
+def http_json(method, uri, content = None):
+    conn = httplib.HTTPConnection('localhost', gae.port)
     try:
         if not content:
             req = conn.request(method, uri)

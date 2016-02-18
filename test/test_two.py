@@ -1,8 +1,8 @@
 import unittest
-import test_case
+import testcase
 from google.appengine.ext import ndb
 
-class TwoTestCase(test_case.TestCase):
+class TwoTestCase(testcase.TestCase):
 
     def testtwo(self):
         class TestModel(ndb.Model):
