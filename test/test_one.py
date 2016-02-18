@@ -1,4 +1,4 @@
-
+import unittest
 import test_case
 import httplib
 import testutil
@@ -38,3 +38,6 @@ class OneTestCase(test_case.TestCase):
 
     def test_other_twice(self):
         self.test_other()
+
+if __name__ == '__main__':
+        unittest.main()
